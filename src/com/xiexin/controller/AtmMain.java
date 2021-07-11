@@ -1,11 +1,9 @@
 package com.xiexin.controller;
 // 自动导包
 
-import com.xiexin.bean.Customer;
-import com.xiexin.bean.CustomerData;
+import com.xiexin.service.CustomerService;
 import com.xiexin.util.TextUitl;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,11 +13,13 @@ public class AtmMain {
 
     private static String cardid;
     private static String cardPwd;
+    private static CustomerService customerService;
 
     public static void main(String[] args) {
+        customerService= new CustomerService();
         // 测试 客户类的 数据   // 作业1: 对 manager管理类 做出  单例模式. 并测试 是否数据初始了.
-        CustomerData customerData = CustomerData.getInstance();
-        List<Customer> customerList = customerData.getCustomerList();
+     //   CustomerData customerData = CustomerData.getInstance();
+      //  List<Customer> customerList = customerData.getCustomerList();
         // 是一个阶段
         TextUitl.welcome();
          int i = 0;
@@ -36,6 +36,7 @@ public class AtmMain {
         // 1. 先校验角色,  判断 cardid 的长度.
         if (cardid.length()==8) { // 客户
             // 校验密码
+            customerService.checkPwd(cardid,cardPwd);
         }
     }
     //  输入张密
