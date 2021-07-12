@@ -38,7 +38,6 @@ public class CustomerService {
         switch (option){
             case "1":
                 System.out.println("余额查询");
-
                 // 查询余额外
                 doSelectMoney();
                     // 当按下1 之后,  回退到  1及选项
