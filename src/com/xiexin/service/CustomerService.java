@@ -86,7 +86,7 @@ public class CustomerService {
             money=money-100;
             System.out.println("您的余额是: " + money);
             // 取完款项之后,  更新 原有的 存款
-            currentCustomer.setMoney(money);
+
         }
     }
 
