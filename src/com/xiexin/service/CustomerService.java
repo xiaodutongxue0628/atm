@@ -49,6 +49,7 @@ public class CustomerService {
                 break;
             case "3":
                 System.out.println("转账");
+                doTruanMoney();
                 goOneHome();
                 break;
             case "4":
@@ -61,12 +62,39 @@ public class CustomerService {
                 break;
         }
     }
+
+    //转账
+    private void doTruanMoney(){
+        System.out.println("请输入对方的号码");
+        Scanner scanner = new Scanner(System.in);
+        String otherAccount = scanner.nextLine();
+        System.out.println("请输入你要转账的金额：");
+        String otherMoney = scanner.nextLine();
+        Double otherMoneyInt = Double.parseDouble(otherMoney);
+        double currentMoney = currentCustomer.getMoney()-otherMoneyInt;
+        Customer other = null;
+        for(Customer customer : customerList) {
+            if (customer.getAccount().equals(otherAccount)) {
+                other = customer;
+            }
+        }
+        double otherOneMoney = other.getMoney() + otherMoneyInt;
+
+        currentCustomer.setMoney(currentMoney);
+        other.setMoney(otherOneMoney);
+
+        for (Customer customer : customerList){
+            System.out.println("customer = " + customer);
+        }
+    }
+
     // 查询余额
     private void doSelectMoney() {
         double money = currentCustomer.getMoney();
         System.out.println(" 余额是 " +money);
     }
 
+    //返回1级目录
     private  void goOneHome( ){
         TextUitl.oneLeveOption();
         Scanner scanner = new Scanner(System.in);
@@ -75,6 +103,7 @@ public class CustomerService {
         oneOption(option);  // 递归算法
     }
 
+    //取款
     private void goGetMoneyHome(){
         TextUitl.getMoneyUI();
         // 1. 让客户输入
