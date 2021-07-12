@@ -54,10 +54,12 @@ public class CustomerService {
                 break;
             case "4":
                 System.out.println("存款");
+                doSaveMoney();
                 goOneHome();
                 break;
             case "5":
                 System.out.println("退卡");
+                doQuitCard();
                 goOneHome();
                 break;
         }
@@ -119,5 +121,27 @@ public class CustomerService {
         }
     }
 
+    //存款
+    private void doSaveMoney(){
+        System.out.println("请输入你想存入的金额");
+        Scanner scanner = new Scanner(System.in);
+        String moneyIn = scanner.nextLine();
+        Double moneyInInt = Double.valueOf(moneyIn);
+        double newMoney = currentCustomer.getMoney() + moneyInInt;
+        currentCustomer.setMoney(newMoney);
+        System.out.println("您的余额是 " + newMoney);
+    }
 
+    //退卡
+    private void doQuitCard(){
+        System.out.println("您是否继续操作yes/no[Y/N]");
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        if (s.equalsIgnoreCase("y")){
+            goOneHome();
+        }
+        if (s.equalsIgnoreCase("n")){
+            System.exit(0);
+        }
+    }
 }
