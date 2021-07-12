@@ -38,13 +38,13 @@ public class CustomerService {
         switch (option){
             case "1":
                 System.out.println("余额查询");
-                // 查询余额外
+                   // 查询余额外
                 doSelectMoney();
                     // 当按下1 之后,  回退到  1及选项
                 goOneHome();
                 break;
             case "2":
-                System.out.println("取款");
+                goGetMoneyHome();
                 goOneHome();
                 break;
             case "3":
@@ -73,6 +73,21 @@ public class CustomerService {
         String option = scanner.nextLine();
         System.out.println("option1 = " + option);
         oneOption(option);  // 递归算法
+    }
+
+    private void goGetMoneyHome(){
+        TextUitl.getMoneyUI();
+        // 1. 让客户输入
+        Scanner scanner = new Scanner(System.in);
+        String  numIn = scanner.nextLine();
+        if (numIn.equals("1")){
+            // 那么 取款100 那么就应该 让 顾客的 钱 -100
+            double money = currentCustomer.getMoney();
+            money=money-100;
+            System.out.println("您的余额是: " + money);
+            // 取完款项之后,  更新 原有的 存款
+            currentCustomer.setMoney(money);
+        }
     }
 
 
